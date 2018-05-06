@@ -1,4 +1,4 @@
-#N canvas 738 310 409 391 10;
+#N canvas 1009 309 409 391 10;
 #N canvas 719 355 450 300 meta 0;
 #X text 175 60 artist : Dan Wilcox;
 #X text 175 80 title : Test;
@@ -10,7 +10,7 @@
 #X text 175 200 totaldiscs : 2;
 #X text 175 220 length : 0:30.123;
 #X restore 28 329 pd meta;
-#N canvas 228 410 450 323 mix 0;
+#N canvas 1062 202 450 346 mix 0;
 #X obj 167 75 hsl 128 15 0 1500 0 0 key empty Pitch -2 -8 0 10 -262144
 -1 -1 0 1;
 #X obj 167 105 hsl 128 15 0 1000 0 0 range empty Vibrato\ Depth -2
@@ -19,7 +19,55 @@
 0 10 -262144 -1 -1 0 1;
 #X obj 262 170 tgl 15 0 tog empty Toggo 17 7 0 10 -262144 -1 -1 0 1
 ;
-#X floatatom 218 170 5 0 0 0 Varro - vr1, f 5;
+#X obj 323 155 bng 15 250 50 0 foo empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 343 155 bng 15 250 50 0 bar empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 363 155 bng 15 250 50 0 baz empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 353 254 print;
+#X obj 314 196 r foo;
+#X obj 352 196 r bar;
+#X obj 390 196 r baz;
+#X msg 323 222 foo;
+#X msg 353 222 bar;
+#X msg 383 222 baz;
+#X obj 55 178 r tog;
+#X obj 55 200 sel;
+#X msg 43 233 OFF;
+#X msg 78 233 ON;
+#X obj 60 270 print toggo;
+#X obj 52 81 bng 15 250 50 0 greet empty hello 17 7 0 10 -262144 -1
+-1;
+#X obj 52 106 bng 15 250 50 0 empty empty greet:goodbye 17 7 0 10 -262144
+-1 -1;
+#X obj 52 126 bng 15 250 50 0 greet empty whatup 17 7 0 10 -262144
+-1 -1;
+#X obj 112 155 r greet;
+#X obj 131 190 route hello goodbye whatup;
+#X msg 129 219 good day;
+#X msg 175 240 see ya;
+#X msg 226 263 sup bro;
+#X obj 189 288 print response;
+#X connect 8 0 11 0;
+#X connect 9 0 12 0;
+#X connect 10 0 13 0;
+#X connect 11 0 7 0;
+#X connect 12 0 7 0;
+#X connect 13 0 7 0;
+#X connect 14 0 15 0;
+#X connect 15 0 16 0;
+#X connect 15 1 17 0;
+#X connect 16 0 18 0;
+#X connect 17 0 18 0;
+#X connect 22 0 23 0;
+#X connect 23 0 24 0;
+#X connect 23 1 25 0;
+#X connect 23 2 26 0;
+#X connect 23 3 27 0;
+#X connect 24 0 27 0;
+#X connect 25 0 27 0;
+#X connect 26 0 27 0;
 #X restore 28 309 pd mix;
 #X obj 277 296 dac~;
 #N canvas 369 98 675 256 test 0;
