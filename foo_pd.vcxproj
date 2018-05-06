@@ -106,7 +106,9 @@ copy $(Configuration)\foo_pd.pdb "$(ProgramFiles)\foobar2000\components\foo_pd.p
     </Link>
     <PostBuildEvent>
       <Command>copy $(Configuration)\foo_pd.dll "$(ProgramFiles)\foobar2000\components\foo_pd.dll"
-copy $(Configuration)\foo_pd.pdb "$(ProgramFiles)\foobar2000\components\foo_pd.pdb"</Command>
+
+copy $(Configuration)\foo_pd.pdb "$(ProgramFiles)\foobar2000\components\foo_pd.pdb"
+copy $(Configuration)\foo_pd.dll components\foo_pd.dll</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

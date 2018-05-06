@@ -17,8 +17,7 @@ static const GUID guid_mygroup =
 static contextmenu_group_popup_factory g_mygroup(guid_mygroup,
  contextmenu_groups::root, "Pd Player", 0);
 
-static void RunTestCommand(metadb_handle_list_cref data);
-void RunCalculatePeak(metadb_handle_list_cref data); //decode.cpp
+static void LoadMixer(metadb_handle_list_cref data);
 
 // Simple context menu item class.
 class myitem : public contextmenu_item_simple {
@@ -45,7 +44,7 @@ public:
 	void context_command(unsigned p_index,metadb_handle_list_cref p_data,const GUID& p_caller) {
 		switch(p_index)
 		{	case cmd_test1:
-				RunTestCommand(p_data);
+				LoadMixer(p_data);
 				break;
 			default: uBugCheck();   }
 	}
@@ -75,7 +74,7 @@ static contextmenu_item_factory_t<myitem> g_myitem_factory;
 
 extern vector<string> mixt;
 
-static void RunTestCommand(metadb_handle_list_cref data) {
+static void LoadMixer(metadb_handle_list_cref data) {
 	pfc::string_formatter message;
 	if (data.get_count() > 0)
 	{	message << data[0];
