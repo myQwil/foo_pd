@@ -1,0 +1,2 @@
+#N canvas 97 363 450 300 10;
+#X obj 183 93 _algorithmic_acidr;

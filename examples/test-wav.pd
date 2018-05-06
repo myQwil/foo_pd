@@ -1,0 +1,38 @@
+#N canvas 794 359 449 300 10;
+#X obj 188 201 dac~;
+#X msg 197 109 open loop.wav \, 1;
+#X obj 265 140 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 197 147 readsf~;
+#X obj 197 76 r play;
+#X obj 197 169 *~;
+#X obj 256 160 r vol;
+#X floatatom 253 186 5 0 0 0 - - -, f 5;
+#X obj 253 207 / 1000;
+#N canvas 0 0 450 300 meta 0;
+#X text 175 60 artist : myQwil;
+#X text 175 80 title : WAV File Test;
+#X text 175 100 album : foo_pd;
+#X text 175 120 date : 2018;
+#X text 175 140 genre : Drum;
+#X text 175 160 composer : Unknown Artist;
+#X text 175 180 performer : loop.wav;
+#X text 175 200 tracknumber : 1;
+#X text 175 220 totaltracks : 12;
+#X text 175 240 discnumber : 2;
+#X text 175 260 length : 3:02;
+#X restore 334 59 pd meta;
+#X connect 1 0 3 0;
+#X connect 2 0 1 0;
+#X connect 3 0 5 0;
+#X connect 3 1 2 0;
+#X connect 4 0 1 0;
+#X connect 5 0 0 1;
+#X connect 5 0 0 0;
+#X connect 6 0 5 1;
+#X connect 7 0 8 0;
+#X connect 8 0 5 1;
+
+nect 7 0 8 0;
+#X connect 8 0 5 1;
+

@@ -1,0 +1,152 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_MYPREFERENCES DIALOGEX 0, 0, 332, 288
+STYLE DS_SETFONT | WS_CHILD
+FONT 8, "Microsoft Sans Serif", 400, 0, 0x0
+BEGIN
+    CONTROL         "Manually refresh Pd Mixer",IDC_CHK_REFRESH,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,47,74,189,10
+END
+
+IDD_UI_ELEMENT DIALOGEX 0, 0, 157, 283
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "Toggle 1",IDC_TOGGLE1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,22,53,10
+    CONTROL         "Toggle 2",IDC_TOGGLE2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,32,53,10
+    CONTROL         "Toggle 3",IDC_TOGGLE3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,8,42,53,10
+    CONTROL         "",IDC_SLIDER1,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,7,76,143,15
+    CONTROL         "",IDC_SLIDER2,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,7,105,143,15
+    CONTROL         "",IDC_SLIDER3,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,7,136,143,15
+    CONTROL         "",IDC_SLIDER4,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,7,165,143,15
+    CONTROL         "",IDC_SLIDER5,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,7,195,143,15
+    CONTROL         "",IDC_SLIDER6,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,7,225,143,15
+    CONTROL         "",IDC_SLIDER7,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,7,255,143,15
+    LTEXT           "Slider 1",IDC_LBL_SLIDER1,16,68,134,8
+    LTEXT           "Slider 2",IDC_LBL_SLIDER2,16,97,134,8
+    LTEXT           "Slider 3",IDC_LBL_SLIDER3,16,127,134,8
+    LTEXT           "Slider 4",IDC_LBL_SLIDER4,16,157,134,8
+    LTEXT           "Slider 5",IDC_LBL_SLIDER5,16,187,134,8
+    LTEXT           "Slider 6",IDC_LBL_SLIDER6,16,217,134,8
+    LTEXT           "Slider 7",IDC_LBL_SLIDER7,16,247,134,8
+    PUSHBUTTON      "bang1",IDC_BTN_BANG1,65,8,27,13
+    PUSHBUTTON      "bang2",IDC_BTN_BANG2,93,8,27,13
+    PUSHBUTTON      "bang3",IDC_BTN_BANG3,121,8,27,13
+    PUSHBUTTON      "msg1",IDC_BTN_MSG1,121,22,27,13
+    PUSHBUTTON      "msg2",IDC_BTN_MSG2,121,36,27,13
+    PUSHBUTTON      "any",IDC_BTN_ANY,121,52,27,13
+    EDITTEXT        IDC_EDT_MSG1,66,22,54,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDT_MSG2,66,36,54,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDT_ANY_DEST,25,52,40,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDT_ANY_MSG,66,52,54,13,ES_AUTOHSCROLL
+    LTEXT           "dest:",IDC_STATIC,7,55,18,8,0,WS_EX_RIGHT
+    PUSHBUTTON      "Refresh",IDC_BTN_REFRESH,13,8,47,13,NOT WS_VISIBLE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_MYPREFERENCES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 325
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 281
+    END
+
+    IDD_UI_ELEMENT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 150
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 276
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_UI_ELEMENT AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_MYPREFERENCES AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
