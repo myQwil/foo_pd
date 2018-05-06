@@ -1,4 +1,4 @@
-#N canvas 719 331 450 350 10;
+#N canvas 1114 303 450 350 10;
 #N canvas 0 0 450 300 meta 0;
 #X text 175 60 artist : myQwil;
 #X text 175 80 title : Squawlent Hill;
@@ -11,18 +11,24 @@
 #X text 175 220 length : 3:33.333;
 #X restore 266 127 pd meta;
 #N canvas 1189 347 450 346 mix 0;
-#X obj 160 72 hsl 128 15 59 79 0 0 k empty Octave -2 -8 0 10 -262144
+#X obj 160 52 hsl 128 15 59 79 0 0 k empty Octave -2 -8 0 10 -262144
 -1 -1 0 1;
-#X obj 161 107 hsl 128 15 0 100 0 0 ref empty Reference\ Pitch -2 -8
+#X obj 161 87 hsl 128 15 0 100 0 0 ref empty Reference\ Pitch -2 -8
 0 10 -262144 -1 -1 0 1;
-#X obj 161 151 hsl 128 15 1000 0 0 0 raw empty Phasors -2 -8 0 10 -262144
+#X obj 161 131 hsl 128 15 1000 0 0 0 raw empty Phasors -2 -8 0 10 -262144
 -1 -1 0 1;
-#X obj 160 182 hsl 128 15 1000 0 0 0 cos1 empty 1st\ Cosine -2 -8 0
+#X obj 160 162 hsl 128 15 1000 0 0 0 cos1 empty 1st\ Cosine -2 -8 0
 10 -262144 -1 -1 0 1;
-#X obj 161 217 hsl 128 15 1000 0 0 0 cos2 empty 2nd\ Cosine -2 -8 0
+#X obj 161 197 hsl 128 15 1000 0 0 0 cos2 empty 2nd\ Cosine -2 -8 0
 10 -262144 -1 -1 0 1;
-#X obj 161 251 hsl 128 15 1000 0 0 0 cos3 empty 3rd\ Cosine -2 -8 0
+#X obj 161 231 hsl 128 15 1000 0 0 0 cos3 empty 3rd\ Cosine -2 -8 0
 10 -262144 -1 -1 0 1;
+#X obj 48 259 bng 15 250 50 0 empty empty msg:l\ 69\ 7\ 12\ 14\ 16\ 17\ 19\ 21\ 22\ 24\ 26\ 28\ 29\ 33'\ ot\ 12
+17 7 0 10 -262144 -1 -1;
+#X obj 48 282 bng 15 250 50 0 msg empty d\ s\ d\ r\ m-23\ f\ s\ l-23\ t-23\ d\ r\ m-23\ f\ l-23'\ ot\ 1
+17 7 0 10 -262144 -1 -1;
+#X obj 45 308 bng 15 250 50 0 chrd empty peek 17 7 0 10 -262144 -1
+-1;
 #X restore 266 151 pd mix;
 #N canvas 0 0 450 300 (subpatch) 0;
 #X array view 512 float 2 black black;
@@ -81,6 +87,7 @@
 #X msg 98 45 1;
 #X obj 25 68 r k;
 #X obj 178 38 r ref;
+#X obj 21 162 r msg;
 #X connect 0 0 1 0;
 #X connect 1 0 2 0;
 #X connect 2 0 3 0;
@@ -113,10 +120,10 @@
 #X connect 29 0 4 0;
 #X connect 30 0 1 0;
 #X connect 31 0 7 0;
+#X connect 32 0 2 0;
 #X restore 260 104 pd msg;
-#N canvas 719 325 450 360 chord 0;
+#N canvas 1166 325 450 383 chord 0;
 #X obj 49 16 r chrd;
-#X obj 49 64 harm 38 7 12 14 16 17 19 21 22 24 26 28 29 33;
 #X obj 49 86 inst 1 0.3 0.5;
 #X obj 68 108 inst -1 0.1 0.3;
 #X obj 87 130 inst 1 0.05 0.175;
@@ -134,46 +141,47 @@
 #X obj 101 268 +~;
 #X obj 284 268 +~;
 #X obj 192 331 outlet~;
-#X msg 120 16 all 1 \, x 69 \, ot 1 \, ref 72;
 #X msg 122 40 d s d r m-23 f s l-23 t-23 d r m-23 f l-23;
 #X obj 94 16 ii;
 #X obj 7 16 r play;
-#X connect 0 0 1 0;
-#X connect 1 0 2 0;
-#X connect 1 1 3 0;
-#X connect 1 2 4 0;
-#X connect 1 3 5 0;
-#X connect 1 4 6 0;
-#X connect 1 5 7 0;
-#X connect 1 6 8 0;
-#X connect 1 7 9 0;
-#X connect 1 8 10 0;
-#X connect 1 9 11 0;
-#X connect 1 10 12 0;
-#X connect 1 11 13 0;
-#X connect 1 12 14 0;
-#X connect 1 13 15 0;
-#X connect 2 0 16 0;
-#X connect 3 0 16 0;
-#X connect 4 0 16 0;
-#X connect 5 0 16 0;
-#X connect 6 0 16 0;
-#X connect 7 0 16 0;
-#X connect 8 0 16 0;
+#X obj 49 64 harm 69 7 12 14 16 17 19 21 22 24 26 28 29 33;
+#X msg 120 16 all 1 \, ot 1 \, ref 72;
+#X connect 0 0 21 0;
+#X connect 1 0 15 0;
+#X connect 2 0 15 0;
+#X connect 3 0 15 0;
+#X connect 4 0 15 0;
+#X connect 5 0 15 0;
+#X connect 6 0 15 0;
+#X connect 7 0 15 0;
+#X connect 8 0 15 0;
 #X connect 9 0 16 0;
-#X connect 10 0 17 0;
-#X connect 11 0 17 0;
-#X connect 12 0 17 0;
-#X connect 13 0 17 0;
-#X connect 14 0 17 0;
+#X connect 10 0 16 0;
+#X connect 11 0 16 0;
+#X connect 12 0 16 0;
+#X connect 13 0 16 0;
+#X connect 14 0 16 0;
 #X connect 15 0 17 0;
-#X connect 16 0 18 0;
-#X connect 17 0 18 0;
-#X connect 19 0 1 0;
-#X connect 20 0 1 0;
-#X connect 21 0 19 0;
-#X connect 21 0 20 0;
-#X connect 22 0 1 0;
+#X connect 16 0 17 0;
+#X connect 18 0 21 0;
+#X connect 19 0 22 0;
+#X connect 19 0 18 0;
+#X connect 20 0 21 0;
+#X connect 21 0 1 0;
+#X connect 21 1 2 0;
+#X connect 21 2 3 0;
+#X connect 21 3 4 0;
+#X connect 21 4 5 0;
+#X connect 21 5 6 0;
+#X connect 21 6 7 0;
+#X connect 21 7 8 0;
+#X connect 21 8 9 0;
+#X connect 21 9 10 0;
+#X connect 21 10 11 0;
+#X connect 21 11 12 0;
+#X connect 21 12 13 0;
+#X connect 21 13 14 0;
+#X connect 22 0 21 0;
 #X restore 38 24 pd chord;
 #N canvas 719 325 450 300 raw 0;
 #X obj 178 72 inlet~;

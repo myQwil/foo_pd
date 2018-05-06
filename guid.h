@@ -1,7 +1,0 @@
-#pragma once
-
-#include "../SDK/foobar2000.h"
-
-// 133cd930 - f42c - 4700 - 820a - 38613622666d
-static const GUID guid_cfg_refresh =
-{ 0x133cd930, 0xf42c, 0x4700, { 0x82, 0x0a, 0x38, 0x61, 0x36, 0x22, 0x66, 0x6d } };

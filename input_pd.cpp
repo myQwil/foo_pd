@@ -2,6 +2,7 @@
 
 #include "PdBase.hpp"
 #include "PdObject.h"
+#include "strhelp.h"
 #include <fstream>
 #include <regex>
 #include <iomanip>
@@ -18,28 +19,6 @@ enum {
 	pd_width = pd_byps * pd_nch, // total sample width
 	pd_read = pd_width*2 * pd_blks*2, // deltaread
 };
-
-std::string ReplaceAll(std::string str, const std::string& from, const std::string& to) {
-	size_t start_pos = 0;
-	while ((start_pos = str.find(from, start_pos)) != std::string::npos) {
-		str.replace(start_pos, from.length(), to);
-		start_pos += to.length(); // Handles case where 'to' is a substring of 'from'
-	}
-	return str;
-}
-
-template<typename Out>
-void split(const string &s, char delim, Out result) {
-	stringstream ss(s);
-	string item;
-	while (getline(ss, item, delim)) *(result++) = item;
-}
-
-vector<string> split(const string &s, char delim) {
-	vector<string> elems;
-	split(s, delim, back_inserter(elems));
-	return elems;
-}
 
 class PdFoo : public pd::PdBase
 { public: Patch play; };

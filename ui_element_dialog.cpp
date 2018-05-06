@@ -2,12 +2,15 @@
 
 #include "resource.h"
 #include "PdBase.hpp"
-#include "globals.h"
+#include "strhelp.h"
 #include <fstream>
 #include <regex>
 
 using namespace std;
 using namespace pd;
+
+vector<string> mixt;
+extern cfg_bool cfg_refresh;
 
 namespace {
 	// Anonymous namespace : standard practice in fb2k components
@@ -20,7 +23,7 @@ namespace {
 	{ 0x5741202f, 0xdcb1, 0x4249, { 0x97, 0x23, 0x97, 0x79, 0x6, 0xbf, 0xc7, 0xaa } };
 
 	static PdBase lpd;
-	
+
 	static struct {
 		int id;
 		int lbl;
@@ -66,28 +69,6 @@ namespace {
 		{ IDC_BTN_MSG2, IDC_EDT_MSG2, "" },
 		{ IDC_BTN_ANY, IDC_EDT_ANY_MSG, "" }
 	};
-
-	std::string ReplaceAll(std::string str, const std::string& from, const std::string& to) {
-		size_t start_pos = 0;
-		while ((start_pos = str.find(from, start_pos)) != std::string::npos) {
-			str.replace(start_pos, from.length(), to);
-			start_pos += to.length(); // Handles case where 'to' is a substring of 'from'
-		}
-		return str;
-	}
-
-	template<typename Out>
-	void split(const string &s, char delim, Out result) {
-		stringstream ss(s);
-		string item;
-		while (getline(ss, item, delim)) *(result++) = item;
-	}
-
-	vector<string> split(const string &s, char delim) {
-		vector<string> elems;
-		split(s, delim, back_inserter(elems));
-		return elems;
-	}
 
 	bool is_number(const std::string& s) {
 		return !s.empty() && s.find_first_not_of("0123456789.-") == std::string::npos;
@@ -144,14 +125,15 @@ namespace {
 			return ui_element_subclass_utility;
 		}
 	private:
+		
+		
 		void on_playback_new_track(metadb_handle_ptr p_track) {
-			GetDlgItem(IDC_BTN_REFRESH).ShowWindow(cfg_refresh ? SW_SHOW : SW_HIDE);
 			string path = p_track->get_path();
 			path.erase(0, 7);
-			text.clear();
+			mixt.clear();
 			string line;
 			ifstream in(path);
-			while (getline(in, line)) text.push_back(line);
+			while (getline(in, line)) mixt.push_back(line);
 			if (!cfg_refresh) pd_mix();
 		}
 
@@ -188,13 +170,19 @@ namespace {
 				{	if (nID == IDC_BTN_ANY)
 						msg[i].dest = uGetDlgItemText(*this, IDC_EDT_ANY_DEST).c_str();
 					string result = uGetDlgItemText(*this, msg[i].ed).c_str();
-					vector<string> list = split(result, ' ');
-					List send;
-					for (int j=1; j < list.size(); ++j)
-					{	if (is_number(list[j]))
-							send.addFloat(stof(list[j]));
-						else send.addSymbol(list[j]);   }
-					if (list.size() > 0) lpd.sendMessage(msg[i].dest, list[0], send);
+					result = ReplaceAll(result, ", ", ",");
+					vector<string> cmds = split(result, ',');
+					for (string cmd : cmds)
+					{	vector<string> list = split(cmd, ' ');
+						List send;
+						for (int j=0; j < list.size(); ++j)
+						{	if (is_number(list[j]))
+								send.addFloat(stof(list[j]));
+							else if (j>0) send.addSymbol(list[j]);   }
+						if (list.size() > 0)
+						{	if (is_number(list[0]))
+								lpd.sendList(msg[i].dest, send);
+							else lpd.sendMessage(msg[i].dest, list[0], send);   }   }
 					return;   }
 			if (nID == IDC_BTN_REFRESH) pd_mix();
 		}
@@ -209,51 +197,38 @@ namespace {
 					lpd << Float(hsl[i].dest, val);   }
 		}
 
-		template<typename Out>
-		void split(const string &s, char delim, Out result) {
-			stringstream ss(s);
-			string item;
-			while (getline(ss, item, delim)) *(result++) = item;
-		}
-
-		vector<string> split(const string &s, char delim) {
-			vector<string> elems;
-			split(s, delim, back_inserter(elems));
-			return elems;
-		}
-
 		void pd_mix() {
 			int s=0, t=0, b=0, m=0;
 			isAny = false;
 			smatch match;
 			regex canvas("^#N canvas \\d+ \\d+ \\d+ \\d+ (mix|fb2k) \\d+;$");
 			for (int i=0; i < PFC_TABSIZE(hsl); ++i) m_slider[i].SetPos(0);
-			for (int i=0; i < text.size(); ++i)
-			{	if (regex_search(text[i], match, canvas))
+			for (int i=0; i < mixt.size(); ++i)
+			{	if (regex_search(mixt[i], match, canvas))
 				{	start = i+1;
 					regex slider("^#X obj \\d+ \\d+ (?:h|v)sl \\d+ \\d+ ([\\d\\.-]+) ([\\d\\.-]+)"
-					   " (\\d+) \\d+ ([\\w\\d\\.-]+) [\\w\\d\\.-]+ ((?:(?:\\\\ )*[\\w\\d\\.-])+)");
+					   " \\d+ \\d+ ([\\w\\d\\.-]+) ([\\w\\d\\.-]+) ((?:(?:\\\\ )*[\\w\\d\\.-])+)");
 					regex obj("#X obj \\d+ \\d+ (bng|tgl) \\d+ (?:\\d+ \\d+ )?\\d+ ([\\w\\d\\.-]+)"
-					   " [\\w\\d\\.-]+ ((?:(?:\\\\ )*[\\w\\d\\.:-])+)");
+					   " [\\w\\d\\.-]+ ((?:(?:\\\\ )*['\\w\\d\\.:-])+)");
 					regex restore("^#X restore \\d+ \\d+ pd "+match[1].str()+";$");
-					for (; i < text.size(); ++i)
+					for (; i < mixt.size(); ++i)
 					{	
-						if (regex_search(text[i], match, slider) && s < PFC_TABSIZE(hsl))
+						if (regex_search(mixt[i], match, slider) && s < PFC_TABSIZE(hsl))
 						{	float min=stof(match[1]), max=stof(match[2]);
 							hsl[s].min = min, hsl[s].max = max;
 							hsl[s].isReverse = (min>max);
-							hsl[s].isGradient = stoi(match[3]);
+							hsl[s].isGradient = (match[4] == "gradient");
 							if (!hsl[s].isGradient)
 							{	if (hsl[s].isReverse)
 									m_slider[s].SetRange(max, min);
 								else m_slider[s].SetRange(min, max);   }
 							else m_slider[s].SetRange(0, 250);
-							hsl[s].dest = match[4];
+							hsl[s].dest = match[3];
 							string label = ReplaceAll(match[5], "\\ ", " ");
 							uSetDlgItemText(*this, hsl[s].lbl, label.c_str());
 							++s;   }
 
-						else if (regex_search(text[i], match, obj))
+						else if (regex_search(mixt[i], match, obj))
 						{	if (match[1] == "bng")
 							{	if (match[3] == "empty" && b < PFC_TABSIZE(bng))
 								{	bng[b].dest = match[2];
@@ -261,6 +236,7 @@ namespace {
 									++b;   }
 								else if (m < PFC_TABSIZE(msg))
 								{	string edit = ReplaceAll(match[3], "\\ ", " ");
+									edit = ReplaceAll(edit, "'", ",");
 									vector<string> any = split(edit, ':');
 									if (any.size() > 1)
 									{	uSetDlgItemText(*this, IDC_EDT_ANY_DEST, any[0].c_str());
@@ -283,7 +259,7 @@ namespace {
 								uSetDlgItemText(*this, tgl[t].id, label.c_str());
 								++t;   }   }
 
-						else if (regex_search(text[i], match, restore))
+						else if (regex_search(mixt[i], match, restore))
 						{	end=i;
 							Trim(s, t, b, m);
 							break;   }   }
@@ -319,19 +295,15 @@ namespace {
 				lpd.computeAudio(true);   }
 			
 			configToUI();
-			GetDlgItem(IDC_BTN_REFRESH).ShowWindow(cfg_refresh ? SW_SHOW : SW_HIDE);
-
 			return FALSE;
 		}
 
 		const ui_element_instance_callback::ptr m_callback;
 		uint32_t m_flags;
 		CTrackBarCtrl m_slider[PFC_TABSIZE(hsl)];
-		vector<string> text;
 		int start=0, end=0;
 		BOOL isAny;
 	};
-
 
 	static service_factory_single_t< ui_element_impl< CDialogUIElem > > g_CDialogUIElem_factory;
 }

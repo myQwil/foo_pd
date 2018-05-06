@@ -110,6 +110,7 @@ copy $(Configuration)\foo_pd.pdb "$(ProgramFiles)\foobar2000\components\foo_pd.p
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="contextmenu.cpp" />
     <ClCompile Include="decode.cpp" />
     <ClCompile Include="input_pd.cpp" />
     <ClCompile Include="main.cpp" />
@@ -122,12 +123,11 @@ copy $(Configuration)\foo_pd.pdb "$(ProgramFiles)\foobar2000\components\foo_pd.p
     <ClCompile Include="ui_element_dialog.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="globals.h" />
-    <ClInclude Include="guid.h" />
     <ClInclude Include="m_pd.h" />
     <ClInclude Include="PdObject.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="strhelp.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="foo_pd.rc" />

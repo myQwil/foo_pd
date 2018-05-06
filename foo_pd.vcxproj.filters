@@ -36,6 +36,9 @@
     <ClCompile Include="PdObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="contextmenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -50,10 +53,7 @@
     <ClInclude Include="PdObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="guid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="globals.h">
+    <ClInclude Include="strhelp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

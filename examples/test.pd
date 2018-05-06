@@ -39,16 +39,23 @@
 #X obj 60 270 print toggo;
 #X obj 52 81 bng 15 250 50 0 greet empty hello 17 7 0 10 -262144 -1
 -1;
-#X obj 52 106 bng 15 250 50 0 empty empty greet:goodbye 17 7 0 10 -262144
+#X obj 52 106 bng 15 250 50 0 empty empty nums:2\ 4\ 6 17 7 0 10 -262144
 -1 -1;
-#X obj 52 126 bng 15 250 50 0 greet empty whatup 17 7 0 10 -262144
--1 -1;
+#X obj 52 126 bng 15 250 50 0 greet empty hello'\ goodbye 17 7 0 10
+-262144 -1 -1;
 #X obj 112 155 r greet;
 #X obj 131 190 route hello goodbye whatup;
 #X msg 129 219 good day;
 #X msg 175 240 see ya;
 #X msg 226 263 sup bro;
 #X obj 189 288 print response;
+#X obj 311 49 unpack 1 2 3;
+#X msg 219 25 12 23 34;
+#X msg 310 76 a \$1;
+#X obj 335 112 print;
+#X msg 350 76 b \$1;
+#X msg 388 76 c \$1;
+#X obj 322 27 r nums;
 #X connect 8 0 11 0;
 #X connect 9 0 12 0;
 #X connect 10 0 13 0;
@@ -68,6 +75,14 @@
 #X connect 24 0 27 0;
 #X connect 25 0 27 0;
 #X connect 26 0 27 0;
+#X connect 28 0 30 0;
+#X connect 28 1 32 0;
+#X connect 28 2 33 0;
+#X connect 29 0 28 0;
+#X connect 30 0 31 0;
+#X connect 32 0 31 0;
+#X connect 33 0 31 0;
+#X connect 34 0 28 0;
 #X restore 28 309 pd mix;
 #X obj 277 296 dac~;
 #N canvas 369 98 675 256 test 0;
