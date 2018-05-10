@@ -8,13 +8,13 @@ a plugin for foobar2000 that allows you to play and interact with Pure Data file
   * foobar looks in your patch for a canvas called [pd mix] and uses the parameters of whatever sliders, bang objects, or toggles it finds there to give your UI controls similar functionality.
 
 ## How playback works
-* libpd sends a 1 to vol, then a bang to play.
+* libpd sends a 1 to **vol**, then a bang to **play**.
   * Generally this is where, in your patch, you have an [r play] hooked up to your metro, and an [r vol] connected to a [*~ ] before your output reaches [dac~].
 
 * the length of the song is arbitrarily set by the user.
   * This affects the trackbar's cursor visibility and ability to set a position.
-  * If the length is 0, there will be no trackbar cursor. Otherwise, the cursor, when moved, will send its position in seconds to 'pos'. From there, it's up to your patch to take that information from [r pos] and work it into song events.
-  * The patch will not actually stop and move on to the next track until libpd receives a bang from [s stop].
+  * If the length is 0, there will be no trackbar cursor. Otherwise, the cursor, when moved, will send its position in seconds to **pos**. From there, it's up to your patch to take that information from [r pos] and work it into song events.
+  * The patch will not actually stop and move on to the next track until pd receives a bang from [s stop].
 
 ## How the mixer works
 * all mixer controls go inside of [pd mix]
