@@ -41,7 +41,7 @@ a plugin for foobar2000 that allows you to play and interact with Pure Data file
 
 * toggles become checkboxes
   * each checkbox can have a label and send symbol assigned to it
-  * there are currently 4 checkboxes
+  * there are currently 3 checkboxes
 
 * right-clicking a track shows the context menu entry Pd Player -> Load mixer.
   * basically, you can load mixers of tracks not currently playing for some potentially interesting exchanges between patches. After loading the mixer, you still need to hit the Refresh button to show the changes.
