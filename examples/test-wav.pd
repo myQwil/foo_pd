@@ -33,6 +33,3 @@
 #X connect 7 0 8 0;
 #X connect 8 0 5 1;
 
-nect 7 0 8 0;
-#X connect 8 0 5 1;
-

@@ -1,7 +1,7 @@
 #N canvas 816 297 500 405 12;
 #N canvas 0 0 450 300 meta 0;
 #X text 175 60 artist : Johannes Kreidler;
-#X text 175 80 title : Phase Modulation;
+#X text 175 80 title : Pretty Mutations;
 #X text 175 100 album : foo_pd;
 #X text 175 120 tracknumber : 9;
 #X text 175 140 totaltracks : 9;
@@ -54,7 +54,7 @@
 #X obj 57 330 outlet~;
 #X obj 37 55 r play;
 #X floatatom 77 168 5 0 0 0 - - -, f 5;
-#X obj 44 228 rind 2.5 7;
+#X obj 44 228 rind 0 7;
 #X obj 145 119 rind 1000 6000;
 #X obj 57 305 pad~ 8000;
 #X obj 37 107 metro 8000;

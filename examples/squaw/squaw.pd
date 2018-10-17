@@ -144,7 +144,7 @@
 #X msg 122 40 d s d r m-23 f s l-23 t-23 d r m-23 f l-23;
 #X obj 94 16 ii;
 #X obj 7 16 r play;
-#X obj 49 64 harm 69 7 12 14 16 17 19 21 22 24 26 28 29 33;
+#X obj 49 64 chrd 69 7 12 14 16 17 19 21 22 24 26 28 29 33;
 #X msg 120 16 all 1 \, ot 1 \, ref 72;
 #X connect 0 0 21 0;
 #X connect 1 0 15 0;

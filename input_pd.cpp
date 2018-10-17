@@ -103,13 +103,12 @@ public:
 								double secs = stod(clock[1]);
 								info.set_length(60*mins + secs);   }
 							else info.set_length(stod(match[2].str()));   }
-						else {
-							string value = match[2].str();
+						else
+						{	string value = match[2].str();
 							value = ReplaceAll(value, " \\,", ",");
 							value = ReplaceAll(value, " \\;", ";");
 							info.meta_set(match[1].str().c_str(),
-										  match[2].str().c_str());
-						}   }
+										  match[2].str().c_str());   }   }
 					else if (regex_search(text[i], match, restore))
 					{	end=i; break;   }   }
 				update = true;
