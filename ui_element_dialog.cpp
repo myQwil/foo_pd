@@ -291,7 +291,10 @@ namespace {
 		BOOL OnInitDialog(CWindow, LPARAM) {
 			if (!lpd.isInited())
 			{	lpd.init(0, 2, 44100, true);
-				lpd.addToSearchPath("components/pd");
+				string fappdata = getenv("APPDATA");
+				fappdata = ReplaceAll(fappdata, "\\", "/");
+				fappdata += "/foobar2000/user-components/foo_pd/extra";
+				lpd.addToSearchPath(fappdata);
 				lpd.computeAudio(true);   }
 			
 			configToUI();

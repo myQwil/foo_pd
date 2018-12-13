@@ -90,65 +90,54 @@ PD_EXTRA_FILES = \
     pure-data/extra/lrshift~/lrshift~.c pure-data/extra/pique/pique.c \
     pure-data/extra/sigmund~/sigmund~.c pure-data/extra/stdout/stdout.c \
 	\
-	pure-data/extra/arraysize/arraysize.c pure-data/extra/bassemu~/bassemu~.c \
-	pure-data/extra/bsaylor/aenv~.c pure-data/extra/bsaylor/susloop~.c \
-	pure-data/extra/bsaylor/svf~.c pure-data/extra/bsaylor/zhzxh~.c \
-	pure-data/extra/bsaylor/bsaylor.c \
+	extra/arraysize/arraysize.c extra/bassemu~/bassemu~.c \
+	extra/bsaylor/aenv~.c extra/bsaylor/susloop~.c extra/bsaylor/svf~.c \
+	extra/bsaylor/zhzxh~.c extra/bsaylor/bsaylor.c \
 	\
-	pure-data/extra/miXed/shared/shared.c \
-	pure-data/extra/miXed/shared/common/clc.c \
-	pure-data/extra/miXed/shared/common/fitter.c \
-	pure-data/extra/miXed/shared/common/grow.c \
-	pure-data/extra/miXed/shared/common/loud.c \
-	pure-data/extra/miXed/shared/sickle/sic.c \
-	pure-data/extra/miXed/cyclone/hammer/counter.c \
-	pure-data/extra/miXed/cyclone/hammer/allhammers.c \
-	pure-data/extra/miXed/cyclone/sickle/curve.c \
-	pure-data/extra/miXed/cyclone/sickle/pink.c \
-	pure-data/extra/miXed/cyclone/sickle/tanh.c \
-	pure-data/extra/miXed/cyclone/sickle/allsickles.c \
+	extra/miXed/shared/shared.c extra/miXed/shared/common/clc.c \
+	extra/miXed/shared/common/fitter.c extra/miXed/shared/common/grow.c \
+	extra/miXed/shared/common/loud.c extra/miXed/shared/sickle/sic.c \
+	extra/miXed/cyclone/hammer/counter.c extra/miXed/cyclone/hammer/allhammers.c \
+	extra/miXed/cyclone/sickle/curve.c extra/miXed/cyclone/sickle/pink.c \
+	extra/miXed/cyclone/sickle/tanh.c extra/miXed/cyclone/sickle/allsickles.c \
 	\
-	pure-data/extra/ekext/cup.c pure-data/extra/ekext/cupd.c \
-	pure-data/extra/ekext/ekext.c \
+	extra/ekext/cup.c extra/ekext/cupd.c extra/ekext/ekext.c \
 	\
-	pure-data/extra/iemlib/filter~.c pure-data/extra/iemlib/init.c \
-	pure-data/extra/iemlib/iemlib1.c pure-data/extra/iemlib/iemlib2.c \
+	extra/iemlib/filter~.c extra/iemlib/init.c \
+	extra/iemlib/iemlib1.c extra/iemlib/iemlib2.c \
 	\
-	pure-data/extra/markex/vector+.c pure-data/extra/markex/vector-.c \
-	pure-data/extra/markex/markex.c \
+	extra/markex/vector+.c extra/markex/vector-.c extra/markex/markex.c \
 	\
-	pure-data/extra/motex/pan~.c \
+	extra/motex/pan~.c \
 	\
-	pure-data/extra/myqwil/ntof.c pure-data/extra/myqwil/fton.c \
-	pure-data/extra/myqwil/muse.c pure-data/extra/myqwil/chrd.c \
-	pure-data/extra/myqwil/rand.c pure-data/extra/myqwil/rind.c \
-	pure-data/extra/myqwil/sploat.c pure-data/extra/myqwil/gloat.c \
-	pure-data/extra/myqwil/logb.c pure-data/extra/myqwil/0x23logb.c \
-	pure-data/extra/myqwil/graid.c pure-data/extra/myqwil/same.c \
-	pure-data/extra/myqwil/ceil.c pure-data/extra/myqwil/radx.c \
-	pure-data/extra/myqwil/!.c pure-data/extra/myqwil/!~.c pure-data/extra/myqwil/0x5e.c \
-	pure-data/extra/myqwil/0x3c0x3e.c pure-data/extra/myqwil/0x3e0x3c.c \
-	pure-data/extra/myqwil/0x230x3c0x3e.c pure-data/extra/myqwil/0x230x3e0x3c.c \
-	pure-data/extra/myqwil/0x230x2b.c pure-data/extra/myqwil/0x230x2d.c \
-	pure-data/extra/myqwil/0x230x2a.c pure-data/extra/myqwil/0x230x2f.c \
-	pure-data/extra/myqwil/0x230x3e.c pure-data/extra/myqwil/0x230x3c.c \
-	pure-data/extra/myqwil/0x230x3d0x3d.c pure-data/extra/myqwil/0x230x210x3d.c \
-	pure-data/extra/myqwil/0x230x3e0x3d.c pure-data/extra/myqwil/0x230x3c0x3d.c \
-	pure-data/extra/myqwil/0x230x7c.c pure-data/extra/myqwil/0x230x7c0x7c.c \
-	pure-data/extra/myqwil/0x230x26.c pure-data/extra/myqwil/0x230x260x26.c \
-	pure-data/extra/myqwil/0x230x3c0x3c.c pure-data/extra/myqwil/0x230x3e0x3e.c \
-	pure-data/extra/myqwil/0x230x25.c pure-data/extra/myqwil/0x230x5e.c \
-	pure-data/extra/myqwil/0x23min.c pure-data/extra/myqwil/0x23max.c \
-	pure-data/extra/myqwil/0x23pow.c pure-data/extra/myqwil/0x23div.c \
-	pure-data/extra/myqwil/0x23mod.c pure-data/extra/myqwil/0x400x25.c \
-	pure-data/extra/myqwil/0x40div.c pure-data/extra/myqwil/0x40mod.c \
-	pure-data/extra/myqwil/0x400x2d.c pure-data/extra/myqwil/0x400x2f.c \
-	pure-data/extra/myqwil/0x40pow.c pure-data/extra/myqwil/0x400x3c0x3c.c \
-	pure-data/extra/myqwil/0x400x3e0x3e.c pure-data/extra/myqwil/myqwil.c \
+	extra/myqwil/ntof.c extra/myqwil/fton.c \
+	extra/myqwil/muse.c extra/myqwil/chrd.c \
+	extra/myqwil/rand.c extra/myqwil/rind.c \
+	extra/myqwil/sploat.c extra/myqwil/gloat.c \
+	extra/myqwil/logb.c extra/myqwil/0x23logb.c \
+	extra/myqwil/graid.c extra/myqwil/same.c \
+	extra/myqwil/ceil.c extra/myqwil/radx.c \
+	extra/myqwil/!.c extra/myqwil/!~.c extra/myqwil/0x5e.c \
+	extra/myqwil/0x3c0x3e.c extra/myqwil/0x3e0x3c.c \
+	extra/myqwil/0x230x3c0x3e.c extra/myqwil/0x230x3e0x3c.c \
+	extra/myqwil/0x230x2b.c extra/myqwil/0x230x2d.c \
+	extra/myqwil/0x230x2a.c extra/myqwil/0x230x2f.c \
+	extra/myqwil/0x230x3e.c extra/myqwil/0x230x3c.c \
+	extra/myqwil/0x230x3d0x3d.c extra/myqwil/0x230x210x3d.c \
+	extra/myqwil/0x230x3e0x3d.c extra/myqwil/0x230x3c0x3d.c \
+	extra/myqwil/0x230x7c.c extra/myqwil/0x230x7c0x7c.c \
+	extra/myqwil/0x230x26.c extra/myqwil/0x230x260x26.c \
+	extra/myqwil/0x230x3c0x3c.c extra/myqwil/0x230x3e0x3e.c \
+	extra/myqwil/0x230x25.c extra/myqwil/0x230x5e.c \
+	extra/myqwil/0x23min.c extra/myqwil/0x23max.c extra/myqwil/0x23pow.c \
+	extra/myqwil/0x23div.c extra/myqwil/0x23mod.c \
+	extra/myqwil/0x400x25.c extra/myqwil/0x40div.c extra/myqwil/0x40mod.c \
+	extra/myqwil/0x400x2d.c extra/myqwil/0x400x2f.c extra/myqwil/0x40pow.c \
+	extra/myqwil/0x400x3c0x3c.c extra/myqwil/0x400x3e0x3e.c \
+	extra/myqwil/myqwil.c \
 	\
-	pure-data/extra/zexy/zexy.c pure-data/extra/zexy/demultiplex.c \
-	pure-data/extra/zexy/0x3c0x7e.c pure-data/extra/zexy/0x3e0x7e.c \
-	pure-data/extra/zexy/makesymbol.c pure-data/extra/zexy/z_zexy.c
+	extra/zexy/zexy.c extra/zexy/demultiplex.c extra/zexy/0x3c0x7e.c \
+	extra/zexy/0x3e0x7e.c extra/zexy/makesymbol.c extra/zexy/z_zexy.c
 
 LIBPD_UTILS = \
     libpd_wrapper/util/z_print_util.c \
@@ -226,6 +215,7 @@ PD_EXTRA_OBJS = \
 prefix ?= ../FooPd/foobar2000/foo_pd
 includedir ?= $(prefix)/include
 libdir ?= $(prefix)/lib
+foobar ?= ../../../AppData/Roaming/foobar2000/user-components/foo_pd
 
 JNI_FILE = libpd_wrapper/util/ringbuffer.c libpd_wrapper/util/z_queued.c $(JNI_SOUND)
 JNIH_FILE = jni/z_jni.h
@@ -240,7 +230,7 @@ PDJAVA_JAR = libs/libpd.jar
 PDJAVA_SRC = libs/libpd-sources.jar
 PDJAVA_DOC = javadoc
 
-EXTRA_INC = -I./pure-data/extra/miXed/shared
+EXTRA_INC = -I./extra/miXed/shared
 
 CFLAGS = -DPD -DHAVE_UNISTD_H -DUSEAPI_DUMMY -I./pure-data/src \
          -I./libpd_wrapper -I./libpd_wrapper/util $(EXTRA_INC) \
@@ -299,16 +289,24 @@ clobber: clean
 install:
 	install -d $(includedir)/libpd
 	install -m 644 libpd_wrapper/z_libpd.h $(includedir)/libpd
+	install -m 644 pure-data/src/m_pd.h $(includedir)/libpd
 	if [ -e libpd_wrapper/util/z_queued.o ]; then \
-	    install -d $(includedir)/libpd/util; \
-	    install -m 644 libpd_wrapper/util/z_print_util.h $(includedir)/libpd/util; \
-	    install -m 644 libpd_wrapper/util/z_queued.h $(includedir)/libpd/util; \
+		install -d $(includedir)/libpd/util; \
+		install -m 644 libpd_wrapper/util/z_print_util.h $(includedir)/libpd/util; \
+		install -m 644 libpd_wrapper/util/z_queued.h $(includedir)/libpd/util; \
 		install -m 644 cpp/*hpp $(includedir)/libpd; \
 	fi
 	install -d $(libdir)
 	install -m 755 $(LIBPD) $(libdir)
-	if [ -e '$(LIBPD_IMPLIB)' ]; then install -m 755 $(LIBPD_IMPLIB) $(libdir); fi
-	if [ -e '$(LIBPD_DEF)' ]; then install -m 755 $(LIBPD_DEF) $(libdir); fi
+	install -m 755 $(LIBPD) $(foobar)
+	if [ -e '$(LIBPD_IMPLIB)' ]; then \
+		install -m 755 $(LIBPD_IMPLIB) $(libdir); \
+		install -m 755 $(LIBPD_IMPLIB) $(foobar); \
+	fi
+	if [ -e '$(LIBPD_DEF)' ]; then \
+		install -m 755 $(LIBPD_DEF) $(libdir); \
+		install -m 755 $(LIBPD_DEF) $(foobar); \
+	fi
 
 uninstall:
 	rm -rf $(includedir)/libpd

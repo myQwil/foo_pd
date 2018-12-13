@@ -29,11 +29,6 @@ static PdObject obj;
 static bool wrote = false;
 static bool iInited = false;
 
-// Note that input class does *not* implement virtual methods or derive from interface classes.
-// Our methods get called over input framework templates.
-// See input_singletrack_impl for descriptions of what each method does.
-// input_stubs just provides stub implementations of mundane methods
-// that are irrelevant for most implementations.
 class input_pd : public input_stubs {
 public:
 	void open(service_ptr_t<file> p_filehint, const char * p_path,
@@ -161,7 +156,10 @@ public:
 		
 		if (!lpd.isInited())
 		{	lpd.init(0, pd_nch, pd_hz, true);
-			lpd.addToSearchPath("components/pd");
+			string fappdata = getenv("APPDATA");
+			fappdata = ReplaceAll(fappdata, "\\", "/");
+			fappdata += "/foobar2000/user-components/foo_pd/extra";
+			lpd.addToSearchPath(fappdata);
 			lpd.setReceiver(&obj);
 			lpd.subscribe("stop");
 			lpd.computeAudio(true);   }
@@ -226,7 +224,7 @@ public:
 	}
 
 	static const char * g_get_name() {
-		return "foo_pd input";
+		return "Pd Player";
 	}
 
 	static const GUID g_get_guid() {
