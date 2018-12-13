@@ -11,9 +11,9 @@
 #X text 175 220 length : 2:20;
 #X restore 20 263 pd info;
 #N canvas 719 355 450 300 mix 0;
-#X obj 153 88 hsl 128 15 0 10000 0 0 _met gradient Speed -2 -8 0 10
+#X obj 153 88 hsl 128 15 0 10000 0 0 _met gradual Speed -2 -8 0 10
 -262144 -1 -1 0 1;
-#X obj 153 121 hsl 128 15 0 500 0 0 fmet gradient Speed\ Fine-tune
+#X obj 153 121 hsl 128 15 0 500 0 0 fmet gradual Speed\ Fine-tune
 -2 -8 0 10 -262144 -1 -1 0 1;
 #X obj 203 168 r _met;
 #X obj 245 168 r fmet;

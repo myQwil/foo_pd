@@ -27,18 +27,19 @@ namespace {
 	static struct {
 		int id;
 		int lbl;
+		int lblOut;
 		string dest;
-		BOOL isGradient;
+		BOOL isGradual;
 		BOOL isReverse;
 		float min, max;
 	} hsl[] = {
-		{ IDC_SLIDER1, IDC_LBL_SLIDER1, "", 0, 0, 0, 250 },
-		{ IDC_SLIDER2, IDC_LBL_SLIDER2, "", 0, 0, 0, 250 },
-		{ IDC_SLIDER3, IDC_LBL_SLIDER3, "", 0, 0, 0, 250 },
-		{ IDC_SLIDER4, IDC_LBL_SLIDER4, "", 0, 0, 0, 250 },
-		{ IDC_SLIDER5, IDC_LBL_SLIDER5, "", 0, 0, 0, 250 },
-		{ IDC_SLIDER6, IDC_LBL_SLIDER6, "", 0, 0, 0, 250 },
-		{ IDC_SLIDER7, IDC_LBL_SLIDER7, "", 0, 0, 0, 250 }
+		{ IDC_SLIDER1, IDC_LBL_SLIDER1, IDC_LBL_SL1OUT, "", 0, 0, 0, 250 },
+		{ IDC_SLIDER2, IDC_LBL_SLIDER2, IDC_LBL_SL2OUT, "", 0, 0, 0, 250 },
+		{ IDC_SLIDER3, IDC_LBL_SLIDER3, IDC_LBL_SL3OUT, "", 0, 0, 0, 250 },
+		{ IDC_SLIDER4, IDC_LBL_SLIDER4, IDC_LBL_SL4OUT, "", 0, 0, 0, 250 },
+		{ IDC_SLIDER5, IDC_LBL_SLIDER5, IDC_LBL_SL5OUT, "", 0, 0, 0, 250 },
+		{ IDC_SLIDER6, IDC_LBL_SLIDER6, IDC_LBL_SL6OUT, "", 0, 0, 0, 250 },
+		{ IDC_SLIDER7, IDC_LBL_SLIDER7, IDC_LBL_SL7OUT, "", 0, 0, 0, 250 }
 	};
 
 	static struct {
@@ -72,6 +73,14 @@ namespace {
 
 	bool is_number(const std::string& s) {
 		return !s.empty() && s.find_first_not_of("0123456789.-") == std::string::npos;
+	}
+
+	template <typename T>
+	string to_stringp(const T a_value, const int n = 5) {
+		ostringstream out;
+		out.precision(n);
+		out << a_value;
+		return out.str();
 	}
 
 	class CDialogUIElem : public CDialogImpl<CDialogUIElem>,
@@ -191,9 +200,11 @@ namespace {
 			for (int i=0; i < PFC_TABSIZE(hsl); ++i)
 				if (pScrollBar.m_hWnd == m_slider[i].m_hWnd)
 				{	float val = m_slider[i].GetPos();
+					float reval;
 					float min=hsl[i].min, max=hsl[i].max;
-					if (hsl[i].isReverse) val = (min-max) - (val-max) + max;
-					if (hsl[i].isGradient) val = val / (250. / (max - min)) + min;
+					if (hsl[i].isGradual) val = val / (250. / (max - min)) + min;
+					else if (hsl[i].isReverse) val = (min-max) - val + max;
+					uSetDlgItemText(*this, hsl[i].lblOut, to_stringp(val).c_str());
 					lpd << Float(hsl[i].dest, val);   }
 		}
 
@@ -212,13 +223,12 @@ namespace {
 					   " [\\w\\d\\.-]+ ((?:(?:\\\\ )*['\\w\\d\\.:-])+)");
 					regex restore("^#X restore \\d+ \\d+ pd "+match[1].str()+";$");
 					for (; i < mixt.size(); ++i)
-					{	
-						if (regex_search(mixt[i], match, slider) && s < PFC_TABSIZE(hsl))
+					{	if (regex_search(mixt[i], match, slider) && s < PFC_TABSIZE(hsl))
 						{	float min=stof(match[1]), max=stof(match[2]);
 							hsl[s].min = min, hsl[s].max = max;
 							hsl[s].isReverse = (min>max);
-							hsl[s].isGradient = (match[4] == "gradient");
-							if (!hsl[s].isGradient)
+							hsl[s].isGradual = (match[4] == "gradual");
+							if (!hsl[s].isGradual)
 							{	if (hsl[s].isReverse)
 									m_slider[s].SetRange(max, min);
 								else m_slider[s].SetRange(min, max);   }
@@ -226,6 +236,7 @@ namespace {
 							hsl[s].dest = match[3];
 							string label = ReplaceAll(match[5], "\\ ", " ");
 							uSetDlgItemText(*this, hsl[s].lbl, label.c_str());
+							uSetDlgItemText(*this, hsl[s].lblOut, to_stringp(min).c_str());
 							++s;   }
 
 						else if (regex_search(mixt[i], match, obj))
@@ -269,7 +280,8 @@ namespace {
 
 		void Trim(int s, int t, int b, int m) {
 			for (; s < PFC_TABSIZE(hsl); ++s)
-				uSetDlgItemText(*this, hsl[s].lbl, "--");
+			{	uSetDlgItemText(*this, hsl[s].lbl, "--");
+				uSetDlgItemText(*this, hsl[s].lblOut, "-");   }
 			for (; t < PFC_TABSIZE(tgl); ++t)
 				uSetDlgItemText(*this, tgl[t].id, "--");
 			for (; b < PFC_TABSIZE(bng); ++b)

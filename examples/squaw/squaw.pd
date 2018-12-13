@@ -1,4 +1,4 @@
-#N canvas 1114 303 450 350 10;
+#N canvas 1055 366 450 350 10;
 #N canvas 0 0 450 300 meta 0;
 #X text 175 60 artist : myQwil;
 #X text 175 80 title : Squawlent Hill;
@@ -11,24 +11,32 @@
 #X text 175 220 length : 3:33.333;
 #X restore 266 127 pd meta;
 #N canvas 1189 347 450 346 mix 0;
-#X obj 160 52 hsl 128 15 59 79 0 0 k empty Octave -2 -8 0 10 -262144
+#X obj 160 22 hsl 128 15 59 79 0 0 k empty Octave -2 -8 0 10 -262144
 -1 -1 0 1;
-#X obj 161 87 hsl 128 15 0 100 0 0 ref empty Reference\ Pitch -2 -8
+#X obj 161 57 hsl 128 15 0 100 0 0 ref empty Reference\ Pitch -2 -8
 0 10 -262144 -1 -1 0 1;
-#X obj 161 131 hsl 128 15 1000 0 0 0 raw empty Phasors -2 -8 0 10 -262144
+#X obj 161 101 hsl 128 15 1000 0 0 0 raw empty Phasors -2 -8 0 10 -262144
 -1 -1 0 1;
-#X obj 160 162 hsl 128 15 1000 0 0 0 cos1 empty 1st\ Cosine -2 -8 0
+#X obj 160 132 hsl 128 15 1000 0 0 0 cos1 empty 1st\ Cosine -2 -8 0
 10 -262144 -1 -1 0 1;
-#X obj 161 197 hsl 128 15 1000 0 0 0 cos2 empty 2nd\ Cosine -2 -8 0
+#X obj 161 167 hsl 128 15 1000 0 0 0 cos2 empty 2nd\ Cosine -2 -8 0
 10 -262144 -1 -1 0 1;
-#X obj 161 231 hsl 128 15 1000 0 0 0 cos3 empty 3rd\ Cosine -2 -8 0
+#X obj 161 201 hsl 128 15 1000 0 0 0 cos3 empty 3rd\ Cosine -2 -8 0
 10 -262144 -1 -1 0 1;
-#X obj 48 259 bng 15 250 50 0 empty empty msg:l\ 69\ 7\ 12\ 14\ 16\ 17\ 19\ 21\ 22\ 24\ 26\ 28\ 29\ 33'\ ot\ 12
+#X obj 48 269 bng 15 250 50 0 empty empty msg:l\ 69\ 7\ 12\ 14\ 16\ 17\ 19\ 21\ 22\ 24\ 26\ 28\ 29\ 33'\ ot\ 12
 17 7 0 10 -262144 -1 -1;
-#X obj 48 282 bng 15 250 50 0 msg empty d\ s\ d\ r\ m-23\ f\ s\ l-23\ t-23\ d\ r\ m-23\ f\ l-23'\ ot\ 1
+#X obj 48 292 bng 15 250 50 0 msg empty d\ s\ d\ r\ m-23\ f\ s\ l-23\ t-23\ d\ r\ m-23\ f\ l-23'\ ot\ 1
 17 7 0 10 -262144 -1 -1;
-#X obj 45 308 bng 15 250 50 0 chrd empty peek 17 7 0 10 -262144 -1
+#X obj 45 318 bng 15 250 50 0 chrd empty peek 17 7 0 10 -262144 -1
 -1;
+#X obj 161 241 hsl 128 15 -3 -10 0 0 btMsg gradual Beat -2 -8 0 10
+-262144 -1 -1 0 1;
+#X msg 69 192 set 4 \$1;
+#X obj 69 214 s msg;
+#X obj 69 153 r btMsg;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+#X connect 12 0 10 0;
 #X restore 266 151 pd mix;
 #N canvas 0 0 450 300 (subpatch) 0;
 #X array view 512 float 2 black black;

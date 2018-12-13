@@ -373,15 +373,15 @@
 #N canvas 0 0 450 300 mix 0;
 #X obj 166 95 hsl 128 15 0 500 0 0 met empty Speed -2 -8 0 10 -262144
 -1 -1 0 1;
-#X obj 166 128 hsl 128 15 0 1.66 0 0 volbd gradient Bass\ Drum -2 -8
+#X obj 166 128 hsl 128 15 0 1.66 0 0 volbd gradual Bass\ Drum -2 -8
 0 10 -262144 -1 -1 0 1;
-#X obj 166 158 hsl 128 15 0 0.9 0 0 volana gradient Ana\ Snare -2 -8
+#X obj 166 158 hsl 128 15 0 0.9 0 0 volana gradual Ana\ Snare -2 -8
 0 10 -262144 -1 -1 0 1;
-#X obj 166 188 hsl 128 15 0 0.9 0 0 volsyn gradient Synth -2 -8 0 10
+#X obj 166 188 hsl 128 15 0 0.9 0 0 volsyn gradual Synth -2 -8 0 10
 -262144 -1 -1 0 1;
-#X obj 166 218 hsl 128 15 0 0.9 0 0 volsnr gradient Snare -2 -8 0 10
+#X obj 166 218 hsl 128 15 0 0.9 0 0 volsnr gradual Snare -2 -8 0 10
 -262144 -1 -1 0 1;
-#X obj 166 248 hsl 128 15 0 0.9 0 0 voltoc gradient Toc -2 -8 0 10
+#X obj 166 248 hsl 128 15 0 0.9 0 0 voltoc gradual Toc -2 -8 0 10
 -262144 -1 -1 0 1;
 #X restore 609 93 pd mix;
 #X obj 73 607 r volbd;
