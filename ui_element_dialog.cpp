@@ -33,13 +33,13 @@ namespace {
 		BOOL isReverse;
 		float min, max;
 	} hsl[] = {
-		{ IDC_SLIDER1, IDC_LBL_SLIDER1, IDC_LBL_SL1OUT, "", 0, 0, 0, 250 },
-		{ IDC_SLIDER2, IDC_LBL_SLIDER2, IDC_LBL_SL2OUT, "", 0, 0, 0, 250 },
-		{ IDC_SLIDER3, IDC_LBL_SLIDER3, IDC_LBL_SL3OUT, "", 0, 0, 0, 250 },
-		{ IDC_SLIDER4, IDC_LBL_SLIDER4, IDC_LBL_SL4OUT, "", 0, 0, 0, 250 },
-		{ IDC_SLIDER5, IDC_LBL_SLIDER5, IDC_LBL_SL5OUT, "", 0, 0, 0, 250 },
-		{ IDC_SLIDER6, IDC_LBL_SLIDER6, IDC_LBL_SL6OUT, "", 0, 0, 0, 250 },
-		{ IDC_SLIDER7, IDC_LBL_SLIDER7, IDC_LBL_SL7OUT, "", 0, 0, 0, 250 }
+		{ IDC_SLIDER1, IDC_LBL_SLIDER1, IDC_LBL_SL1OUT, "", 0, 0, 0, 1000 },
+		{ IDC_SLIDER2, IDC_LBL_SLIDER2, IDC_LBL_SL2OUT, "", 0, 0, 0, 1000 },
+		{ IDC_SLIDER3, IDC_LBL_SLIDER3, IDC_LBL_SL3OUT, "", 0, 0, 0, 1000 },
+		{ IDC_SLIDER4, IDC_LBL_SLIDER4, IDC_LBL_SL4OUT, "", 0, 0, 0, 1000 },
+		{ IDC_SLIDER5, IDC_LBL_SLIDER5, IDC_LBL_SL5OUT, "", 0, 0, 0, 1000 },
+		{ IDC_SLIDER6, IDC_LBL_SLIDER6, IDC_LBL_SL6OUT, "", 0, 0, 0, 1000 },
+		{ IDC_SLIDER7, IDC_LBL_SLIDER7, IDC_LBL_SL7OUT, "", 0, 0, 0, 1000 }
 	};
 
 	static struct {
@@ -202,7 +202,7 @@ namespace {
 				{	float val = m_slider[i].GetPos();
 					float reval;
 					float min=hsl[i].min, max=hsl[i].max;
-					if (hsl[i].isGradual) val = val / (250. / (max - min)) + min;
+					if (hsl[i].isGradual) val = val / (1000. / (max - min)) + min;
 					else if (hsl[i].isReverse) val = (min-max) - val + max;
 					uSetDlgItemText(*this, hsl[i].lblOut, to_stringp(val).c_str());
 					lpd << Float(hsl[i].dest, val);   }
@@ -232,7 +232,7 @@ namespace {
 							{	if (hsl[s].isReverse)
 									m_slider[s].SetRange(max, min);
 								else m_slider[s].SetRange(min, max);   }
-							else m_slider[s].SetRange(0, 250);
+							else m_slider[s].SetRange(0, 1000);
 							hsl[s].dest = match[3];
 							string label = ReplaceAll(match[5], "\\ ", " ");
 							uSetDlgItemText(*this, hsl[s].lbl, label.c_str());
@@ -297,7 +297,7 @@ namespace {
 		void configToUI() {
 			for (int i=0; i < PFC_TABSIZE(hsl); ++i)
 			{	m_slider[i] = GetDlgItem(hsl[i].id);
-				m_slider[i].SetRange(0, 250);   }
+				m_slider[i].SetRange(0, 1000);   }
 		}
 
 		BOOL OnInitDialog(CWindow, LPARAM) {

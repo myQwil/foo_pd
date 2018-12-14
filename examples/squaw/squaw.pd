@@ -15,13 +15,13 @@
 -1 -1 0 1;
 #X obj 161 57 hsl 128 15 0 100 0 0 ref empty Reference\ Pitch -2 -8
 0 10 -262144 -1 -1 0 1;
-#X obj 161 101 hsl 128 15 1000 0 0 0 raw empty Phasors -2 -8 0 10 -262144
+#X obj 161 101 hsl 128 15 1 0 0 0 raw gradual Phasors -2 -8 0 10 -262144
 -1 -1 0 1;
-#X obj 160 132 hsl 128 15 1000 0 0 0 cos1 empty 1st\ Cosine -2 -8 0
+#X obj 160 132 hsl 128 15 1 0 0 0 cos1 gradual 1st\ Cosine -2 -8 0
 10 -262144 -1 -1 0 1;
-#X obj 161 167 hsl 128 15 1000 0 0 0 cos2 empty 2nd\ Cosine -2 -8 0
+#X obj 161 167 hsl 128 15 1 0 0 0 cos2 gradual 2nd\ Cosine -2 -8 0
 10 -262144 -1 -1 0 1;
-#X obj 161 201 hsl 128 15 1000 0 0 0 cos3 empty 3rd\ Cosine -2 -8 0
+#X obj 161 201 hsl 128 15 1 0 0 0 cos3 gradual 3rd\ Cosine -2 -8 0
 10 -262144 -1 -1 0 1;
 #X obj 48 269 bng 15 250 50 0 empty empty msg:l\ 69\ 7\ 12\ 14\ 16\ 17\ 19\ 21\ 22\ 24\ 26\ 28\ 29\ 33'\ ot\ 12
 17 7 0 10 -262144 -1 -1;
@@ -418,7 +418,7 @@
 #X connect 59 0 60 0;
 #X connect 61 0 54 0;
 #X connect 61 0 14 0;
-#X connect 62 0 26 0;
-#X connect 63 0 29 0;
-#X connect 64 0 32 0;
-#X connect 65 0 35 0;
+#X connect 62 0 24 1;
+#X connect 63 0 27 1;
+#X connect 64 0 30 1;
+#X connect 65 0 33 1;

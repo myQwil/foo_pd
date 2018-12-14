@@ -74,7 +74,7 @@
     <PostBuildEvent>
       <Command>copy $(Configuration)\foo_pd.dll "$(APPDATA)\foobar2000\user-components\foo_pd\foo_pd.dll"
 copy $(Configuration)\foo_pd.pdb "$(APPDATA)\foobar2000\user-components\foo_pd\foo_pd.pdb"
-copy $(Configuration)\foo_pd.dll components\foo_pd.dll</Command>
+copy $(Configuration)\foo_pd.dll user-components\foo_pd\foo_pd.dll</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -107,7 +107,7 @@ copy $(Configuration)\foo_pd.dll components\foo_pd.dll</Command>
     <PostBuildEvent>
       <Command>copy $(Configuration)\foo_pd.dll "$(APPDATA)\foobar2000\user-components\foo_pd\foo_pd.dll"
 copy $(Configuration)\foo_pd.pdb "$(APPDATA)\foobar2000\user-components\foo_pd\foo_pd.pdb"
-copy $(Configuration)\foo_pd.dll components\foo_pd.dll</Command>
+copy $(Configuration)\foo_pd.dll user-components\foo_pd\foo_pd.dll</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
