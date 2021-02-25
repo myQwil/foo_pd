@@ -15,7 +15,7 @@
 #X obj 486 51 + 1;
 #X obj 146 221 /~ 16;
 #X obj 444 86 % 12;
-#X obj 292 372 adac~;
+#X obj 292 372 add~;
 #X obj 202 268 *~ 0;
 #X obj 444 22 cpt 8;
 #X obj 455 233 / 180224;
@@ -24,8 +24,8 @@
 #X obj 455 350 * 1000;
 #X obj 455 322 / 512;
 #X obj 322 206 sig~ 55;
-#X obj 148 164 ad~ 0 250;
-#X obj 390 203 ad~ 25 125;
+#X obj 148 164 ad 0 250;
+#X obj 390 203 ad 25 125;
 #X obj 583 269 inlet;
 #X obj 300 338 *~;
 #X obj 91 22 r play;

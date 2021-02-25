@@ -23,11 +23,11 @@
 #X obj 250 82 rind 50 200;
 #X obj 39 150 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
-#X obj 253 491 adac~;
+#X obj 253 491 add~;
 #X obj 506 200 rind 25 75;
 #X obj 149 79 t b b b b b;
-#X obj 129 193 ad~ 1 800;
-#X obj 454 247 ad~ 0 100;
+#X obj 129 193 ad 1 800;
+#X obj 454 247 ad 0 100;
 #X obj 82 286 fkick~ 70 32;
 #X obj 45 172 r play;
 #X obj 141 483 throw~ sview;

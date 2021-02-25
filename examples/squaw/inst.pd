@@ -1,6 +1,6 @@
 #N canvas 719 355 450 300 10;
 #X obj 150 77 inlet;
-#X obj 150 104 pad~;
+#X obj 150 104 zp~;
 #X obj 190 77 r pmnt;
 #X obj 150 126 +~;
 #X obj 150 148 phasor~;
@@ -9,10 +9,10 @@
 #X obj 150 214 *~;
 #X obj 150 236 outlet~;
 #X obj 201 104 rind -0.5 0.5;
-#X obj 201 126 pad~;
-#X obj 256 53 r dis;
+#X obj 201 126 zp~;
+#X obj 276 53 r dis;
 #X obj 201 192 rind \$2 \$3;
-#X obj 201 214 pad~;
+#X obj 201 214 zp~;
 #X obj 299 77 r bt;
 #X obj 299 109 r mt;
 #X obj 279 160 inlet;

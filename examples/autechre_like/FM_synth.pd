@@ -30,7 +30,7 @@
 #X obj 235 485 *~;
 #X obj 282 485 *~;
 #X obj 163 515 delwrite~ del 4000;
-#X obj 125 661 adac~;
+#X obj 125 661 add~;
 #X obj 254 316 *~ 0;
 #X obj 294 335 * 4;
 #X obj 235 453 /~ 2;
@@ -51,9 +51,9 @@
 #X msg 184 72 1;
 #X obj 219 102 spigot;
 #X obj 184 48 del 20000;
-#X obj 254 267 ad~ 0.5 800;
-#X obj 154 298 ad~ 0.5 700;
-#X obj 129 380 freqm~;
+#X obj 254 267 ad 0.5 800;
+#X obj 154 298 ad 0.5 700;
+#X obj 129 380 fmosc~;
 #X obj 41 26 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0 1
 ;
 #X obj 41 78 s fmon;

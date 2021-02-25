@@ -1837,7 +1837,7 @@
 #X obj 336 63 s play;
 #X obj 331 39 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
-#X obj 261 290 pad~;
+#X obj 261 290 zp~;
 #X obj 396 203 metro 18.87;
 #N canvas 0 50 450 300 drillbt1 0;
 #N canvas 567 593 470 315 divider 0;
