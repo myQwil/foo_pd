@@ -1,0 +1,116 @@
+diff --git a/Makefile b/Makefile
+index b664fa9..5f7ca88 100644
+--- a/Makefile
++++ b/Makefile
+@@ -212,6 +212,8 @@ CFLAGS = -DPD -DHAVE_UNISTD_H -DUSEAPI_DUMMY \
+ LDFLAGS += $(ADDITIONAL_LDFLAGS)
+ CSHARP_LDFLAGS += $(ADDITIONAL_LDFLAGS)
+ JAVA_LDFLAGS += $(ADDITIONAL_LDFLAGS)
++EXTRA_OBJS = $(PD_EXTRA_OBJS)
++include foopd-extra.make
+ 
+ .PHONY: libpd csharplib javalib javadoc javasrc install uninstall clean clobber
+ 
+@@ -223,10 +225,10 @@ else
+ endif
+ 
+ $(LIBPD): ${PD_FILES:.c=.o} ${UTIL_FILES:.c=.o} ${EXTRA_FILES:.c=.o}
+-	$(CC) -o $(LIBPD) $^ $(LDFLAGS) -lm -lpthread
++	$(CC) -o $(LIBPD) $^ $(EXTRA_OBJS) $(LDFLAGS) -lm -lpthread $(EXTRA_LIBS)
+ 
+ $(LIBPD_STATIC): ${PD_FILES:.c=.o} ${UTIL_FILES:.c=.o} ${EXTRA_FILES:.c=.o}
+-	ar rcs $(LIBPD_STATIC) $^
++	ar rcs $(LIBPD_STATIC) $^ $(EXTRA_OBJS)
+ 
+ javalib: $(JNIH_FILE) $(PDJAVA_JAR)
+ 
+@@ -257,7 +259,7 @@ $(PDCSHARP): ${PD_FILES:.c=.o} ${EXTRA_FILES:.c=.o}
+ 	$(CC) -o $(PDCSHARP) $^ $(CSHARP_LDFLAGS) -lm -lpthread
+ 
+ clean:
+-	rm -f ${PD_FILES:.c=.o} ${PD_EXTRA_OBJS} ${JNI_FILE:.c=.o}
++	rm -f ${PD_FILES:.c=.o} ${JNI_FILE:.c=.o}
+ 	rm -f ${UTIL_FILES:.c=.o} ${PD_EXTRA_FILES:.c=.o}
+ 
+ clobber: clean
+diff --git a/foopd-extra.make b/foopd-extra.make
+new file mode 100644
+index 0000000..2c48924
+--- /dev/null
++++ b/foopd-extra.make
+@@ -0,0 +1,29 @@
++
++PD_EXTRA_FILES += $(patsubst %, ../xtra/%.c, \
++muse chrd rand rind ntof fton sploat gloat slx sly same ceil radix delp x \
++0x21 0x21~ is has pak unpak 0x40pak 0x40unpak chrono tabread2~ tabosc2~ myqwil \
++blunt/hotop blunt/revop blunt/blunt)
++
++PD_EXTRA_FILES += $(patsubst %, ../pd-cyclone/cyclone_objects/binaries/audio/%.c, \
++curve lessthan greaterthan triangle tanh)
++
++PD_EXTRA_FILES += $(patsubst %, ../pd-cyclone/cyclone_objects/binaries/control/%.c, \
++counter)
++
++PD_EXTRA_FILES += $(patsubst %, ../motex/sources/%.c, \
++pan~)
++
++PD_EXTRA_FILES += $(patsubst %, ../ekext/sources/%.c, \
++cup)
++
++PD_EXTRA_FILES += $(patsubst %, ../zexy/src/%.c, \
++demultiplex makesymbol)
++
++PD_EXTRA_FILES += $(patsubst %, ../iemlib/src/%.c, \
++init filter~)
++
++CFLAGS += -I../pd-cyclone/shared -I../iemlib/include
++
++EXTRA_OBJS :=
++
++EXTRA_LIBS :=
+diff --git a/libpd_wrapper/z_libpd.c b/libpd_wrapper/z_libpd.c
+index 8550a32..480bbf3 100644
+--- a/libpd_wrapper/z_libpd.c
++++ b/libpd_wrapper/z_libpd.c
+@@ -52,6 +52,20 @@ int sys_pollgui(void);
+   void pique_setup(void);
+   void sigmund_tilde_setup(void);
+   void stdout_setup(void);
++
++  void myQwil_setup(void);
++  void curve_tilde_setup(void);
++  void lessthan_tilde_setup(void);
++  void greaterthan_tilde_setup(void);
++  void triangle_tilde_setup(void);
++  void tanh_tilde_setup(void);
++  void counter_setup(void);
++  void pan_tilde_setup(void);
++  void cup_setup(void);
++  void demultiplex_setup(void);
++  void makesymbol_setup(void);
++  void init_setup(void);
++  void filter_tilde_setup(void);
+ #endif
+ 
+ static PERTHREAD t_atom *s_argv = NULL;
+@@ -104,6 +118,20 @@ int libpd_init(void) {
+   pique_setup();
+   sigmund_tilde_setup();
+   stdout_setup();
++
++  myQwil_setup();
++  curve_tilde_setup();
++  lessthan_tilde_setup();
++  greaterthan_tilde_setup();
++  triangle_tilde_setup();
++  tanh_tilde_setup();
++  counter_setup();
++  pan_tilde_setup();
++  cup_setup();
++  demultiplex_setup();
++  makesymbol_setup();
++  init_setup();
++  filter_tilde_setup();
+ #endif
+ #ifndef LIBPD_NO_NUMERIC
+   setlocale(LC_NUMERIC, "C");
