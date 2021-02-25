@@ -12,7 +12,7 @@
  * https://github.com/danomatika/ofxPd
  *
  */
-#include "PdObject.h"
+#include "PdObject.hpp"
 
 #include <iostream>
 

@@ -17,14 +17,14 @@
 
 // custom receiver class
 class PdObject : public pd::PdReceiver {
+public:
+	void print         (const std::string &message);
+	void receiveBang   (const std::string &dest);
+	void receiveFloat  (const std::string &dest ,float num);
+	void receiveSymbol (const std::string &dest ,const std::string &symbol);
+	void receiveList   (const std::string &dest ,const pd::List &list);
+	void receiveMessage
+	(const std::string &dest ,const std::string &msg ,const pd::List &list);
 
-	public:
-		void print(const std::string& message);
-		void receiveBang(const std::string& dest);
-		void receiveFloat(const std::string& dest, float num);
-		void receiveSymbol(const std::string& dest, const std::string& symbol);
-		void receiveList(const std::string& dest, const pd::List& list);
-		void receiveMessage(const std::string& dest, const std::string& msg, const pd::List& list);
-
-		bool stop = false;
+	bool stop = false;
 };

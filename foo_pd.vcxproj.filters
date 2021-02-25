@@ -44,7 +44,7 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PdObject.h">
+    <ClInclude Include="PdObject.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="strhelp.h">
