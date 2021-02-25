@@ -1,8 +1,9 @@
 #include "stdafx.h"
 
 #include "resource.h"
-#include "PdBase.hpp"
-#include "strhelp.h"
+#include <helpers/BumpableElem.h>
+
+#include "PdFoo.hpp"
 #include <fstream>
 #include <regex>
 
@@ -10,6 +11,7 @@ using namespace std;
 using namespace pd;
 
 vector<string> mixt;
+extern PdFoo lpd;
 extern cfg_bool cfg_refresh;
 
 namespace {
@@ -21,8 +23,6 @@ namespace {
 // 5741202f - dcb1 - 4249 - 9723 - 977906bfc7aa
 static const GUID guid_myelem =
 { 0x5741202f ,0xdcb1 ,0x4249 ,{ 0x97 ,0x23 ,0x97 ,0x79 ,0x6 ,0xbf ,0xc7 ,0xaa } };
-
-static PdBase lpd;
 
 static struct {
 	int id;
@@ -135,6 +135,16 @@ public:
 		return ui_element_subclass_utility;
 	}
 
+	ui_element_min_max_info get_min_max_info() {
+		ui_element_min_max_info ret;
+		CSize DPI = QueryScreenDPIEx(*this);
+		if (DPI.cx <= 0 || DPI.cy <= 0) // sanity
+			DPI = CSize(96 ,96);
+		ret.m_min_width = MulDiv(220 ,DPI.cx ,96);
+		ret.adjustForWindow(*this);
+		return ret;
+	}
+
 private:
 	void on_playback_new_track(metadb_handle_ptr p_track) {
 		string path = p_track->get_path();
@@ -237,6 +247,7 @@ for (int i=0; i < mixt.size(); ++i)
 				else m_slider[s].SetRange(0 ,1000);
 				hsl[s].dest = match[3];
 				string label = ReplaceAll(match[5] ,"\\ " ," ");
+				label = ReplaceAll(label ,"_" ," ");
 				uSetDlgItemText(*this ,hsl[s].lbl    ,label.c_str());
 				uSetDlgItemText(*this ,hsl[s].lblOut ,to_stringp(min).c_str());
 				++s;   }
@@ -249,6 +260,7 @@ for (int i=0; i < mixt.size(); ++i)
 						++b;   }
 					else if (m < PFC_TABSIZE(msg))
 					{	string edit = ReplaceAll(match[3] ,"\\ " ," ");
+						edit = ReplaceAll(edit ,"_" ," ");
 						edit = ReplaceAll(edit ,"'" ,",");
 						vector<string> any = split(edit ,':');
 						if (any.size() > 1)
@@ -267,6 +279,7 @@ for (int i=0; i < mixt.size(); ++i)
 				else if (t < PFC_TABSIZE(tgl))
 				{	tgl[t].dest = match[2];
 					string label = ReplaceAll(match[3] ,"\\ " ," ");
+					label = ReplaceAll(label ,"_" ," ");
 					uSetDlgItemText(*this ,tgl[t].id ,label.c_str());
 					++t;   }   }
 
@@ -280,7 +293,6 @@ for (int i=0; i < mixt.size(); ++i)
 	}
 
 	void Trim(int s ,int t ,int b ,int m) {
-
 		for (; s < PFC_TABSIZE(hsl); ++s)
 		{	uSetDlgItemText(*this ,hsl[s].lbl    ,"--");
 			uSetDlgItemText(*this ,hsl[s].lblOut ,"-");   }
@@ -303,24 +315,20 @@ for (int i=0; i < mixt.size(); ++i)
 	}
 
 	BOOL OnInitDialog(CWindow ,LPARAM) {
-		if (!lpd.isInited())
-		{	lpd.init(0 ,2 ,44100 ,true);
-			string fappdata = getenv("APPDATA");
-			fappdata = ReplaceAll(fappdata ,"\\" ,"/");
-			fappdata += "/foobar2000/user-components/foo_pd/extra";
-			lpd.addToSearchPath(fappdata);
-			lpd.computeAudio(true);   }
-
+		lpd.init();
 		configToUI();
 		return FALSE;
 	}
 
-	const ui_element_instance_callback::ptr m_callback;
 	uint32_t m_flags;
 	CTrackBarCtrl m_slider[PFC_TABSIZE(hsl)];
 	int start=0 ,end=0;
 	BOOL isAny;
+protected:
+	const ui_element_instance_callback::ptr m_callback;
 };
 
-static service_factory_single_t< ui_element_impl< CDialogUIElem > > g_CDialogUIElem_factory;
+class ui_element_myimpl : public ui_element_impl_withpopup<CDialogUIElem> {};
+
+static service_factory_single_t<ui_element_myimpl> g_ui_element_myimpl_factory;
 } // end namespace

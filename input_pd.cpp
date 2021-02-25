@@ -1,33 +1,13 @@
 #include "stdafx.h"
-
-#include "PdBase.hpp"
-#include "PdObject.hpp"
-#include "strhelp.h"
+#include "PdFoo.hpp"
 #include <fstream>
-#include <regex>
 #include <iomanip>
+#include <regex>
 
 using namespace std;
 using namespace pd;
 
-enum {
-	 pd_nch = 2		// # of channels
-	,pd_bips = 16	// bits per sample
-	,pd_hz = 44100	// sample rate
-	,pd_blks = 64	// libpd.blockSize()
-	,pd_byps = pd_bips / 8 // bytes per sample
-	,pd_width = pd_byps * pd_nch // total sample width
-	,pd_read = pd_width*2 * pd_blks*2 // deltaread
-};
-
-class PdFoo : public pd::PdBase
-{ public: Patch play; };
-
-static PdFoo lpd;
-static PdObject obj;
-
-static bool wrote = false;
-static bool iInited = false;
+PdFoo lpd;
 
 class input_pd : public input_stubs {
 public:
@@ -56,10 +36,10 @@ public:
 		t_filesize size = m_file->get_size(p_abort);
 		if (size != filesize_invalid) p_info = info;
 		p_info.info_set_int("bitspersample" ,pd_bips);
-		p_info.info_set_int("samplerate"    ,pd_hz);
+		p_info.info_set_int("samplerate"    ,lpd.srate);
 		p_info.info_set_int("channels"      ,pd_nch);
 		p_info.info_set("encoding" ,"lossless");
-		p_info.info_set_bitrate((pd_bips * pd_nch * pd_hz + 500) / 1000);
+		p_info.info_set_bitrate((pd_bips * pd_nch * lpd.srate + 500) / 1000);
 	}
 
 	void pd_info() {
@@ -96,7 +76,7 @@ public:
 							if (clock.size() > 1)
 							{	int mins = stoi(clock[0]);
 								double secs = stod(clock[1]);
-								info.set_length(60*mins + secs);   }
+								info.set_length(60. * mins + secs);   }
 							else info.set_length(stod(match[2].str()));   }
 						else
 						{	string value = match[2].str();
@@ -131,7 +111,7 @@ public:
 		ostringstream s;
 		s.precision(5);
 		int mins = info.get_length() / 60;
-		double secs = info.get_length() - (60*mins);
+		double secs = info.get_length() - (60. * mins);
 		s << "#X text " << x << " " << y << " length : " << mins << ":"
 			<< setfill('0') << setw((secs == (int)secs) ? 2 : 6) << secs << ";";
 		coms.push_back(s.str());
@@ -153,20 +133,7 @@ public:
 	void decode_initialize(unsigned p_flags ,abort_callback &p_abort) {
 		//equivalent to seek to zero, except it also works on nonseekable streams
 		m_file->reopen(p_abort);
-		
-		if (!lpd.isInited())
-		{	lpd.init(0 ,pd_nch ,pd_hz ,true);
-			string fappdata = getenv("APPDATA");
-			fappdata = ReplaceAll(fappdata ,"\\" ,"/");
-			fappdata += "/foobar2000/user-components/foo_pd/extra";
-			lpd.addToSearchPath(fappdata);
-			lpd.setReceiver(&obj);
-			lpd.subscribe("stop");
-			lpd.computeAudio(true);   }
-		else if (!iInited) 
-		{	lpd.setReceiver(&obj);
-			lpd.subscribe("stop");   }
-		iInited = true;
+		lpd.init();
 	}
 
 	bool decode_run(audio_chunk &p_chunk ,abort_callback &p_abort) {
@@ -187,7 +154,7 @@ public:
 
 		lpd.processShort(pd_bips ,0 ,m_buffer.get_ptr());
 		p_chunk.set_data_fixedpoint
-		(	m_buffer.get_ptr() ,pd_read * pd_width ,pd_hz ,pd_nch ,pd_bips
+		(	m_buffer.get_ptr() ,pd_read * pd_width ,lpd.srate ,pd_nch ,pd_bips
 			,audio_chunk::g_guess_channel_config(pd_nch)   );
 
 		//processed successfully, no EOF
@@ -240,6 +207,7 @@ public:
 	file_info_impl info;
 	vector<string> text;
 	int start=0 ,end=0;
+	bool wrote = false;
 };
 
 static input_singletrack_factory_t<input_pd> g_input_pd_factory;

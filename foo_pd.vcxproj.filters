@@ -44,10 +44,16 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="strhelp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="samplerate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="PdObject.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="strhelp.h">
+    <ClInclude Include="PdFoo.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
