@@ -17,6 +17,8 @@
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
+[Dd]ebug FB2K/
+[Rr]elease FB2K/
 x64/
 x86/
 bld/
@@ -53,6 +55,7 @@ artifacts/
 *_i.h
 *.ilk
 *.meta
+*.o
 *.obj
 *.pch
 *.pdb

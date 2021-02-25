@@ -9,7 +9,7 @@ a plugin for foobar2000 that allows you to play and interact with Pure Data file
 
 ## How playback works
 * libpd sends a 1 to **vol**, then a bang to **play**.
-  * Generally this is where, in your patch, you have an [r play] hooked up to your metro, and an [r vol] connected to a [*~ ] before your output reaches [dac~].
+  * Generally this is where, in your patch, you have an [r play] hooked up to your metro, and an [r vol] connected to a [\*~ ] before your output reaches [dac~ ].
 
 * the length of the song is arbitrarily set by the user.
   * This affects the trackbar's cursor visibility and ability to set a position.
