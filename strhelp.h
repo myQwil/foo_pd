@@ -4,26 +4,25 @@
 #include <vector>
 #include <iterator>
 
-using namespace std;
-
-static string ReplaceAll(string str, const string& from, const string& to) {
+static std::string ReplaceAll
+(std::string str ,const std::string &from ,const std::string &to) {
 	size_t start_pos = 0;
-	while ((start_pos = str.find(from, start_pos)) != string::npos) {
-		str.replace(start_pos, from.length(), to);
-		start_pos += to.length(); // Handles case where 'to' is a substring of 'from'
-	}
+	while ((start_pos = str.find(from ,start_pos)) != std::string::npos)
+	{	str.replace(start_pos ,from.length() ,to);
+		start_pos += to.length();   }
 	return str;
 }
 
 template<typename Out>
-static void split(const string &s, char delim, Out result) {
+static void split(const std::string &s ,char delim ,Out result) {
 	stringstream ss(s);
-	string item;
-	while (getline(ss, item, delim)) *(result++) = item;
+	std::string item;
+	while (getline(ss ,item ,delim))
+		*(result++) = item;
 }
 
-static vector<string> split(const string &s, char delim) {
-	vector<string> elems;
-	split(s, delim, back_inserter(elems));
+static std::vector<std::string> split(const std::string &s ,char delim) {
+	std::vector<std::string> elems;
+	split(s ,delim ,std::back_inserter(elems));
 	return elems;
 }
