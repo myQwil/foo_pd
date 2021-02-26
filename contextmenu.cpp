@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "strhelp.h"
 #include <fstream>
-#include <vector>
 
 using namespace std;
 

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "resource.h"
+#include <helpers/atl-misc.h>
 
 // 133cd930 - f42c - 4700 - 820a - 38613622666d
 static const GUID guid_cfg_refresh =

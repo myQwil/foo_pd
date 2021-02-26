@@ -140,7 +140,7 @@ public:
 		CSize DPI = QueryScreenDPIEx(*this);
 		if (DPI.cx <= 0 || DPI.cy <= 0) // sanity
 			DPI = CSize(96 ,96);
-		ret.m_min_width = MulDiv(220 ,DPI.cx ,96);
+		ret.m_min_width = MulDiv(210 ,DPI.cx ,96);
 		ret.adjustForWindow(*this);
 		return ret;
 	}
@@ -234,6 +234,7 @@ for (int i=0; i < mixt.size(); ++i)
 		regex obj("#X obj \\d+ \\d+ (bng|tgl) \\d+ (?:\\d+ \\d+ )?\\d+ ([\\w\\d\\.-]+)"
 		   " [\\w\\d\\.-]+ ((?:(?:\\\\ )*['\\w\\d\\.:-])+)");
 		regex restore("^#X restore \\d+ \\d+ pd "+match[1].str()+";$");
+		regex spaces("(\\\\ |_)");
 		for (; i < mixt.size(); ++i)
 		{	if (regex_search(mixt[i] ,match ,slider) && s < PFC_TABSIZE(hsl))
 			{	float min=stof(match[1]) ,max=stof(match[2]);
@@ -246,8 +247,7 @@ for (int i=0; i < mixt.size(); ++i)
 					else m_slider[s].SetRange(min ,max);   }
 				else m_slider[s].SetRange(0 ,1000);
 				hsl[s].dest = match[3];
-				string label = ReplaceAll(match[5] ,"\\ " ," ");
-				label = ReplaceAll(label ,"_" ," ");
+				string label = regex_replace(match[5].str() ,spaces ," ");
 				uSetDlgItemText(*this ,hsl[s].lbl    ,label.c_str());
 				uSetDlgItemText(*this ,hsl[s].lblOut ,to_stringp(min).c_str());
 				++s;   }
@@ -259,8 +259,7 @@ for (int i=0; i < mixt.size(); ++i)
 						uSetDlgItemText(*this ,bng[b].id ,bng[b].dest.c_str());
 						++b;   }
 					else if (m < PFC_TABSIZE(msg))
-					{	string edit = ReplaceAll(match[3] ,"\\ " ," ");
-						edit = ReplaceAll(edit ,"_" ," ");
+					{	string edit = regex_replace(match[3].str() ,spaces ," ");
 						edit = ReplaceAll(edit ,"'" ,",");
 						vector<string> any = split(edit ,':');
 						if (any.size() > 1)
@@ -278,8 +277,7 @@ for (int i=0; i < mixt.size(); ++i)
 
 				else if (t < PFC_TABSIZE(tgl))
 				{	tgl[t].dest = match[2];
-					string label = ReplaceAll(match[3] ,"\\ " ," ");
-					label = ReplaceAll(label ,"_" ," ");
+					string label = regex_replace(match[3].str() ,spaces ," ");
 					uSetDlgItemText(*this ,tgl[t].id ,label.c_str());
 					++t;   }   }
 

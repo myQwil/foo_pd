@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
-#include <sstream>
 #include <vector>
+#include <sstream>
 #include <iterator>
 
 static std::string ReplaceAll
